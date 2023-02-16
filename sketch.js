@@ -3,6 +3,8 @@ let pg;
 let sun;
 let earth;
 let moon;
+let caustic;
+let jupiter;
 let xEarthSunDistance = 300;
 let yEarthSunDistance = 0;
 let zEarthSunDistance = 300;
@@ -20,6 +22,7 @@ function preload() {
   earth = loadImage('./images/earth.jpg'); // load an image
   moon = loadImage('./images/moon.jpg'); // load an image
   caustic = loadImage('./images/CAUSTIC.JPG'); // load an image
+  jupiter = loadImage('./images/JUPITER.jpg'); // load an image
 }
 
 function windowResized() {
@@ -97,11 +100,29 @@ pg.pop();
 pg.push();
 pg.noStroke();
 pg.texture(moon); // apply the moon image as a texture
-pg.translate(xEarth/2, 0, zEarth/2); // move the moon to the position of the earth
+pg.translate(xEarth/2, zEarth/2, 0); // move the moon to the position of the earth
 pg.rotateZ(angle); // rotate the moon around the earth by the angle
 //pg.translate(moonXdist, 0, moonZdist); // move the moon to the desired distance from the earth
 pg.sphere(10); // draw a sphere with a radius of 10
 pg.pop();
+
+//earth
+  // draw the second sphere
+  pg.push(); // save the current transformation state
+  pg.normalMaterial();
+  pg.rotateY(angle);  
+  pg.translate(xEarth+500, 0, zEarth+500);
+  pg.texture(jupiter); // apply the image as a texture
+  pg.sphere(300); // draw the sphere
+  pg.pop(); // restore the previous transformation state
+
+//  //jupiter
+//   pg.push();
+//   pg.noStroke();
+//   pg.texture(jupiter); // apply the jupiter image as a texture
+//   pg.translate(xEarth+100, 0, zEarth+100);
+//   pg.rotateY(angle);
+//   pg.sphere(50)
 
   // display the 3D graphics object on the canvas
   background(220)
